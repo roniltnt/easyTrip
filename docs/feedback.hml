@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EasyTrip - Feedback</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #e7f0f7;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: #fff;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 450px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #2c3e50;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      color: #34495e;
+    }
+    textarea {
+      width: 100%;
+      height: 120px;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1em;
+      resize: vertical;
+    }
+    button {
+      margin-top: 25px;
+      width: 100%;
+      padding: 12px;
+      background-color: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #005fa3;
+    }
+    .success {
+      margin-top: 15px;
+      text-align: center;
+      color: green;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>We'd love your feedback!</h2>
+    <form id="feedbackForm">
+      <label for="feedback">Tell us how we can improve:</label>
+      <textarea id="feedback" name="feedback" required></textarea>
+      <button type="submit">Submit Feedback</button>
+    </form>
+    <div class="success" id="successMessage">Thank you for your feedback!</div>
+  </div>
+
+  <script>
+    const form = document.getElementById('feedbackForm');
+    const successMessage = document.getElementById('successMessage');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = { feedback: form.feedback.value };
+
+      try {
+        const response = await fetch("https://roniltnt.app.n8n.cloud/webhook/feedback-submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+          successMessage.style.display = "block";
+          form.reset();
+        } else {
+          alert("Failed to submit feedback.");
+        }
+      } catch (error) {
+        alert("An error occurred: " + error.message);
+      }
+    });
+  </script>
+</body>
+</html>
