@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Travel Recommendations</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    body {
+      background-color: #f5f5f5;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+      background-color: #ffffff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    .highlight-title {
+      font-weight: bold;
+      background-color: #e0f7fa;
+      padding: 6px 12px;
+      border-radius: 8px;
+      display: inline-block;
+    }
+
+    .section {
+      margin-bottom: 30px;
+    }
+
+    .section h2 {
+      color: #34495e;
+      font-size: 1.4em;
+      margin-bottom: 10px;
+      text-align: left;
+    }
+
+    .section p {
+      font-size: 1.05em;
+      line-height: 1.6;
+      margin: 0;
+      text-align: left;
+    }
+
+    .images {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin: 30px 0;
+    }
+
+    .images img {
+      max-width: 250px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    }
+
+    #map {
+      height: 400px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-top: 20px;
+    }
+
+    h2.map-title {
+      text-align: center;
+      color: #2c3e50;
+      margin-top: 40px;
+    }
+
+    .item-label {
+      font-weight: bold;
+      background-color: #f0f8ff;
+      padding: 4px 10px;
+      border-radius: 6px;
+      min-width: 30px;
+      text-align: right;
+    }
+
+    .attraction {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .attraction-text {
+      flex: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <h1>
+      <span class="highlight-title">
+          Roni Laufer's Travel
+      </span>
+    </h1>
+
+    <div class="section">
+      <p>Paris, the City of Light! Here are three popular tourist attractions in Paris, each with a short description:</p>
+      <ul>
+        <li><strong>The Eiffel Tower</strong>: An iconic symbol of Paris. Visit for amazing views and dinner at the Le 58 Tour Eiffel.</li>
+        <li><strong>The Louvre Museum</strong>: Home to the Mona Lisa and thousands of masterpieces. The glass pyramid is a must-see.</li>
+        <li><strong>Disneyland Paris</strong>: Perfect for families and kids. Enjoy thrilling rides, shows, and Disney magic.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Top Attractions</h2>
+
+      <div class="attraction">
+        <span class="item-label">1.</span>
+        <div class="attraction-text">
+          The Eiffel Tower - Climb or ride to the top and see Paris from above!
+        </div>
+      </div>
+
+      <div class="attraction">
+        <span class="item-label">2.</span>
+        <div class="attraction-text">
+          The Louvre Museum - Explore a world-class collection of art and history.
+        </div>
+      </div>
+
+      <div class="attraction">
+        <span class="item-label">3.</span>
+        <div class="attraction-text">
+          Disneyland Paris - Family-friendly park with beloved characters and attractions.
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <p>
+        Additional fun ideas for kids: visit the Paris Aquarium, take a scenic Seine River cruise, or stop by the Musée en Herbe for interactive exhibits!
+      </p>
+    </div>
+
+    <div class="images">
+      <img src="https://images.unsplash.com/photo-1471623320832-752e8bbf8413?auto=format&fit=crop&w=800&q=60" alt="Eiffel Tower" />
+      <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=800&q=60" alt="Louvre Museum" />
+      <img src="https://images.unsplash.com/photo-1522093007474-d86e9bf7ba6f?auto=format&fit=crop&w=800&q=60" alt="Disneyland Paris" />
+    </div>
+
+    <h2 class="map-title">Attractions on the Map</h2>
+    <div id="map"></div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    const map = L.map('map').setView([48.8566, 2.3522], 12); // Paris center
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    L.marker([48.8584, 2.2945]).addTo(map).bindPopup("The Eiffel Tower");
+    L.marker([48.8606, 2.3376]).addTo(map).bindPopup("The Louvre Museum");
+    L.marker([48.8701, 2.7740]).addTo(map).bindPopup("Disneyland Paris");
+  </script>
+
+</body>
+</html>
